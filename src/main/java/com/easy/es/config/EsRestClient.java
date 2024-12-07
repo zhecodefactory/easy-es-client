@@ -58,6 +58,10 @@ public class EsRestClient {
         this.esConfigProperties = esConfigProperties;
     }
 
+    /**
+     * 初始化ES客户端
+     * 根据配置创建RestHighLevelClient实例
+     */
     public void init() {
         List<EsClusterConfig> esConfigs = esConfigProperties.getEsConfigs();
         for (EsClusterConfig esConfig : esConfigs) {
@@ -91,6 +95,12 @@ public class EsRestClient {
         return clientMap.get(clusterName);
     }
 
+    /**
+     * 插入文档
+     * @param esIndexInfo 索引信息
+     * @param esSourceData 文档数据
+     * @return 是否插入成功
+     */
     public boolean insertDoc(EsIndexInfo esIndexInfo,
                              EsSourceData esSourceData) {
 
@@ -110,6 +120,12 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 更新文档
+     * @param esIndexInfo 索引信息
+     * @param esSourceData 文档数据
+     * @return 是否更新成功
+     */
     public boolean updateDoc(EsIndexInfo esIndexInfo, EsSourceData esSourceData) {
         try {
             UpdateRequest updateRequest = new UpdateRequest();
@@ -126,6 +142,12 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 批量更新文档
+     * @param esIndexInfo 索引信息
+     * @param esSourceDataList 文档数据列表
+     * @return 是否执行成功
+     */
     public boolean batchUpdateDoc(EsIndexInfo esIndexInfo,
                                   List<EsSourceData> esSourceDataList) {
         try {
@@ -159,6 +181,11 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 删除索引
+     * @param esIndexInfo 索引信息
+     * @return 是否删除成功
+     */
     public boolean delete(EsIndexInfo esIndexInfo) {
 
         try {
@@ -178,6 +205,12 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 删除文档
+     * @param esIndexInfo 索引信息
+     * @param docId 文档ID
+     * @return 是否删除成功
+     */
     public boolean deleteDoc(EsIndexInfo esIndexInfo,
                              String docId) {
 
@@ -195,6 +228,12 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 判断文档是否存在
+     * @param esIndexInfo 索引信息
+     * @param docId 文档ID
+     * @return 是否存在
+     */
     public boolean isExistDocById(EsIndexInfo esIndexInfo,
                                   String docId) {
 
@@ -213,6 +252,12 @@ public class EsRestClient {
     }
 
 
+    /**
+     * 获取文档
+     * @param esIndexInfo 索引信息
+     * @param docId 文档ID
+     * @return 文档内容
+     */
     public Map<String, Object> getDocById(EsIndexInfo esIndexInfo,
                                           String docId) {
 
@@ -231,6 +276,13 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 获取文档
+     * @param esIndexInfo 索引信息
+     * @param docId 文档ID
+     * @param fields 字段数组
+     * @return 文档内容
+     */
     public Map<String, Object> getDocById(EsIndexInfo esIndexInfo,
                                           String docId,
                                           String[] fields) {
@@ -250,6 +302,12 @@ public class EsRestClient {
 
     }
 
+    /**
+     * 搜索文档
+     * @param esIndexInfo 索引信息
+     * @param esSearchRequest 搜索请求参数
+     * @return 搜索结果
+     */
     public SearchResponse searchWithTermQuery(EsIndexInfo esIndexInfo,
                                               EsSearchRequest esSearchRequest) {
         try {
